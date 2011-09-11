@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:orientation="vertical">
+	<TextView
+		android:id="@+id/lblLoginid"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textColor="#000000" android:text="xxxxxx" android:background="#99ff99"></TextView>
+	<LinearLayout android:layout_height="wrap_content" android:id="@+id/menuBar" android:background="#66cc66" android:layout_width="match_parent" android:baselineAligned="true" android:orientation="horizontal">
+		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button01"></Button>
+		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button02"></Button>
+		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button03"></Button>
+		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button04"></Button>
+	</LinearLayout>
+	<ListView android:id="@+id/listViewTimeline" android:layout_height="wrap_content" android:layout_width="match_parent"></ListView>
+</LinearLayout>
