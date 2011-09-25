@@ -52,7 +52,7 @@ public class WassrAdapter extends ArrayAdapter{
 			holder = new WassrViewHolder();
 			holder.name = screenName;
 			holder.text = text;
-			//holder.iconImg = imageView;
+			//holder.iconImg = imageView; //TODO
 
 			view.setTag(holder);
 
@@ -61,14 +61,13 @@ public class WassrAdapter extends ArrayAdapter{
 			holder = (WassrViewHolder)view.getTag();
 		}
 
-
 		// 表示すべきデータの取得
-//	    TwitterStatus item = (TwitterStatus)items.get(position);
 		WassrStatus item = (WassrStatus)items.get(position);
-		holder.name.setText(item.getScreenName());
+//		holder.name.setText(item.getScreenName());
+		holder.name.setText("by "+ item.getScreenName() + " (" +item.getUserloginId() +")");
 		holder.text.setText(item.getText());
 
-//		//画像がない場合は取得しにいく
+//		//画像がない場合は取得しにいく //TODO
 //		String imageUrl = item.getProfileImageUrl();
 //		Bitmap image = ImageCache.getImage(imageUrl);
 //		if (image == null){

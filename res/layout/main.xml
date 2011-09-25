@@ -7,11 +7,11 @@
 		android:id="@+id/lblLoginid"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textColor="#000000" android:text="xxxxxx" android:background="#99ff99"></TextView>
-	<LinearLayout android:layout_height="wrap_content" android:id="@+id/menuBar" android:background="#66cc66" android:layout_width="match_parent" android:baselineAligned="true" android:orientation="horizontal">
-		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button01"></Button>
-		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button02"></Button>
-		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button03"></Button>
-		<Button android:text="refresh" android:height="5px" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/Button04"></Button>
+	<ListView android:id="@+id/listViewTimeline" android:layout_width="match_parent" android:layout_height="414dp" android:layout_weight="1.18"></ListView>
+	<LinearLayout android:layout_width="match_parent" android:id="@+id/bottomMenu" android:background="#33cc33" android:weightSum="1" android:paddingTop="10px" android:layout_height="45dp" android:paddingLeft="20px">
+		<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="refresh" android:id="@+id/refresh" android:onClick="onClickButton"></Button>
+		<Button android:id="@+id/button2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="new post"></Button>
+		<Button android:id="@+id/button3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="my page"></Button>
+		<Button android:id="@+id/button4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="logout"></Button>
 	</LinearLayout>
-	<ListView android:id="@+id/listViewTimeline" android:layout_height="wrap_content" android:layout_width="match_parent"></ListView>
 </LinearLayout>

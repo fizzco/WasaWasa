@@ -2,32 +2,13 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_width="fill_parent" android:layout_height="wrap_content">
 	<TextView
 		android:id="@+id/lblLoginid"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"></TextView>
-	<LinearLayout
-		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout1"
-		android:layout_width="match_parent">
-		<EditText
-			android:layout_weight="1"
-			android:gravity="top"
-			android:hint="今何してるにゃ？"
-			android:layout_height="wrap_content"
-			android:id="@+id/editText01"
-			android:layout_width="fill_parent"></EditText>
-		<Button
-			android:text="Post"
-			android:onClick="onClickButton"
-			android:layout_height="wrap_content"
-			android:id="@+id/button1"
-			android:layout_width="wrap_content"></Button>
-	</LinearLayout>
-	<ListView
-		android:layout_height="wrap_content"
-		android:id="@+id/listViewTimeline"
-		android:layout_width="match_parent"></ListView>
+		android:layout_height="wrap_content" android:textColor="#000000" android:text="xxxxxx" android:background="#99ff99"></TextView>
+	<EditText android:hint="今何してる？" android:id="@+id/editText01" android:gravity="top" android:layout_width="fill_parent" android:layout_height="90dp">
+		<requestFocus></requestFocus>
+	</EditText>
+	<Button android:layout_height="wrap_content" android:id="@+id/button1" android:onClick="onClickButton" android:text="Post" android:layout_width="match_parent"></Button>
 </LinearLayout>

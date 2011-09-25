@@ -12,17 +12,13 @@
     android:id="@+id/linearLayout1"
     android:layout_width="match_parent"
     android:orientation="vertical" android:background="#ffffff">
+        <TextView android:id="@+id/TextViewText" android:textColor="#006600" android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content"></TextView>
         <TextView
         android:text="TextView"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/TextViewName"
         android:textStyle="bold" android:textColor="#66cc66"></TextView>
-        <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/TextViewText" android:textColor="#006600"></TextView>
     </LinearLayout>
 
 </LinearLayout>

@@ -13,24 +13,24 @@ public class WassrParser {
 	private static final String STATUSES = "statuses";
     private static final String STATUS = "status";
     private static final String TEXT = "text";
+    private static final String ID = "id";
+    private static final String USERLOGINID = "user_login_id";
     private static final String SCREEN_NAME = "screen_name";
     private static final String PROFILE_IMAGE_URL = "profile_image_url";
 
     private String url;
     private String id;
-    private String ps;
+    private String pass;
 
-    public WassrParser(String url,String id, String ps) {
+    public WassrParser(String url,String id, String pass) {
 //    public WassrParser(String urlStr){
         this.url = url;
         this.id = id;
-        this.ps = ps;
+        this.pass = pass;
     }
 
     /**
-     *
-     * これだと鍵っ子が見えない。
-     *
+     *JSON PARSE for Time line.
      * @return
      */
     public ArrayList<WassrStatus> parse() {
@@ -38,14 +38,7 @@ public class WassrParser {
         XmlPullParser parser = Xml.newPullParser();
         try {
 
-
-//        	HttpClient.doPost("http://api.wassr.jp/footmark/recent.json",
-//					wasid, wasps , "");
-
-        	byte[] data = HttpClient.getByteArrayFromURL(url);
-
-
-
+        	byte[] data = HttpClient.getByteArrayFromURL(url,id,pass);
             parser.setInput(new StringReader(new String(data, "UTF-8")));
             int eventType = parser.getEventType();
             WassrStatus currentStatus = null;
@@ -56,7 +49,6 @@ public class WassrParser {
                 switch (eventType) {
 
                 case XmlPullParser.START_DOCUMENT:
-
                 	list = new ArrayList<WassrStatus>();
                     break;
 
@@ -64,13 +56,17 @@ public class WassrParser {
                     name = parser.getName();
 
                     if (name.equalsIgnoreCase(STATUS)) {
-
                     	currentStatus = new WassrStatus();
 
                     } else if (currentStatus != null) {
-
                         if (name.equalsIgnoreCase(TEXT)) {
                             currentStatus.setText(parser.nextText());
+
+                        } else if (name.equalsIgnoreCase(USERLOGINID)) {
+                            currentStatus.setUserloginId(parser.nextText());
+
+                        } else if (name.equalsIgnoreCase(ID)) {
+                            currentStatus.setId(parser.nextText());
 
                         } else if (name.equalsIgnoreCase(SCREEN_NAME)) {
                             currentStatus.setScreenName(parser.nextText());

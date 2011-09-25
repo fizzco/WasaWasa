@@ -5,28 +5,29 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+/**
+ * メイン画面
+ * @author fizzco
+ *
+ */
 public class MainActivity extends Activity {
 
 	private ArrayList<WassrStatus> list = null;
 	private ListView listViewTimeline = null;
-
 	// アダプターの宣言
 	private WassrAdapter adapter = null;
-
 	// パブリックタイムラインのURL
-	final String TIMELINE_URL = "http://api.wassr.jp/statuses/public_timeline.xml";
 	final String FRIEND_TL_URL = "http://api.wassr.jp/statuses/friends_timeline.xml";
-
-	// ヒトコト更新のURL
-	final String POST_URL = "http://api.wassr.jp/statuses/update.json";
 
 	private String wid = "";
 	private String wps = "";
-	private String tlurl = "";
 
 	/**
 	 *  初期表示処理
@@ -39,37 +40,28 @@ public class MainActivity extends Activity {
 		// Intentからユーザ情報を取得する
 		Intent intent = getIntent();
 		if (intent != null){
-			if(intent.hasExtra("ID")){
-				wid = intent.getStringExtra("ID");
-				tlurl = FRIEND_TL_URL + "?id=" +  wid ;
-
+			if(intent.hasExtra("WID")){
+				wid = intent.getStringExtra("WID");
 				TextView loginid = (TextView) findViewById(R.id.lblLoginid);
-				loginid.setText(wid.subSequence(0, wid.length()));
+				loginid.setText("id:"+ wid.subSequence(0, wid.length()));
 			}
-			if(intent.hasExtra("PS")){
-				wps = intent.getStringExtra("PS");
+			if(intent.hasExtra("WPW")){
+				wps = intent.getStringExtra("WPW");
 			}
 		}
-
 		listViewTimeline = (ListView)findViewById(R.id.listViewTimeline);
-
 		// タイムラインの取得
-		getTimeline(tlurl,wid,wps);
+		getTimeline();
 	}
 
 	/**
 	 * TL取得表示
 	 * @param url
 	 */
-//	public void getTimeline(String url) {
-	public void getTimeline(String url,String id, String ps){
-
-
-		// いまの方法ではかぎっ子は拾えない。
-
+	public void getTimeline(){
 
 		// XMLパースクラスにお任せ
-		WassrParser parser = new WassrParser(url, id, ps);
+		WassrParser parser = new WassrParser(FRIEND_TL_URL,wid, wps);
 		this.list = parser.parse();
 
 		// アダプターの作成
@@ -78,6 +70,7 @@ public class MainActivity extends Activity {
 		}
 		adapter = new WassrAdapter(this, R.layout.list, list);
 		listViewTimeline.setAdapter(adapter);
+		Toast.makeText(this, "refresh now.", Toast.LENGTH_SHORT);
 	}
 
 	/**
@@ -85,11 +78,40 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
 	public void onClickButton(View view) {
-//		if (view.getId() == R.id.post) {
+		
+		if (view.getId() == R.id.refresh) {
 			// タイムラインの更新
-			getTimeline(tlurl,wid,wps);
-//		}
+			getTimeline();
+		}
+	}
+	/**
+	 * menuボタン押下時
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(Menu.NONE, 0, 0, "post");
+		menu.add(Menu.NONE, 1, 1, "...");
+		return super.onCreateOptionsMenu(menu);
 	}
 
+	/**
+	 * menu	選択時
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
+		switch (item.getItemId()) {
+		case 0:
+			Intent intent =new Intent(getApplicationContext(), PostActivity.class);
+			intent.putExtra("WID", wid); 
+			intent.putExtra("WPW", wps);
+			startActivity(intent);
+			getTimeline();
+			break;
+		case 1:
+			Toast.makeText(this, "…", Toast.LENGTH_SHORT).show();
+			break;
+		}
+		return true;
+	}
 }

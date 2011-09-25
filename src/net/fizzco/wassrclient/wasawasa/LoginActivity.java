@@ -13,29 +13,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends Activity {
-	// test
-	/** Called when the activity is first created. */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 	}
 
-
 	// ボタン押下処理
 	public void onClickButton(View view) {
 		if(view.getId() == R.id.btnLogin){
+			TextView message = (TextView) findViewById(R.id.textView2);		
 
 			// Login情報
 			String wasid = ((EditText)findViewById(R.id.edtId)).getText().toString().trim();
 			String wasps = ((EditText)findViewById(R.id.edtPass)).getText().toString().trim();
 			if ((wasid.length()!=0)&&(wasps.length() != 0)) {
-				TextView message = (TextView) findViewById(R.id.textView2);
-
-				message.setText("LogIn");
-				message.setText("LogIn.");
-				message.setText("LogIn..");
-				message.setText("LogIn...");
+				
+				message.setText("waitting...");
 
 				// 足跡取得を投げて、401エラーをひろう。
 				if (HttpClient.doPost("http://api.wassr.jp/footmark/recent.json",
@@ -47,23 +42,21 @@ public class LoginActivity extends Activity {
 				} else {
 
 					// 認証OK
-					Log.d("WasaWasa", "id:"+ wasid + "/pass:"+wasps);
+					Log.d("WasaWasa!", "id:"+ wasid + "/pass:"+wasps);
 
-					message.setText("LogIn....OK!");
+					message.setText("LogIn .... Success!");
 
 					Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-					intent.putExtra("ID", wasid);
-					intent.putExtra("PS", wasps);
+					intent.putExtra("WID", wasid);
+					intent.putExtra("WPW", wasps);
 					startActivity(intent);
 
 					finish(); // Login画面は破棄
 
-					Log.d("WasaWasa", "startActivity(intent);");
+					Log.d("WasaWasa!", "startActivity(intent);");
 
 				}
 			}
 		}
 	}
-
-
 }
